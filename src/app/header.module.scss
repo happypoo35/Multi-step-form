@@ -100,11 +100,11 @@
 
   span {
     grid-column: 2;
-    font-size: 15px;
+    font-size: 0.875rem;
     font-weight: 700;
     text-transform: uppercase;
     color: white;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.06em;
 
     @include mobile {
       display: none;

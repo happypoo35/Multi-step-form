@@ -31,7 +31,7 @@ export const Footer = () => {
       )}
       {stepId < 3 ? (
         <Button type="submit" form={`form-${stepId}`}>
-          Next step
+          Next Step
         </Button>
       ) : (
         <Button type="button" variant="cta" onClick={handleConfirm}>

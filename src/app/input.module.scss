@@ -21,13 +21,14 @@
     font-size: 1rem;
     font-weight: 500;
     color: color(blue, 400);
-    height: 2.5rem;
+    height: 3rem;
     padding-inline: 0.875rem;
     border-radius: 0.5rem;
-    border: 1px solid color(gray, 300);
+    border: 1px solid color(gray, 200);
     outline: none;
 
     @include mobile {
+      height: 2.5rem;
       border-radius: 0.25rem;
     }
 
