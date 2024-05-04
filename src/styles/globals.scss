@@ -1,0 +1,48 @@
+@import "typography";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: color(blue, 50);
+  display: grid;
+  height: 100dvh;
+  padding-inline: 1rem;
+
+  @include tablet {
+    padding-inline: 0;
+  }
+}
+
+fieldset {
+  border: none;
+}
+
+[data-select-box] {
+  cursor: pointer;
+  border: 1px solid color(gray, 200);
+  border-radius: 0.5rem;
+  width: 100%;
+  transition: 0.15s;
+
+  &:has(input:checked) {
+    background: color(blue, 50);
+    border-color: color(blue, 300);
+  }
+
+  @include hover {
+    border-color: color(blue, 300);
+  }
+
+  input {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+}

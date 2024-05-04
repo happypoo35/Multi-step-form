@@ -1,0 +1,33 @@
+.button {
+  cursor: pointer;
+  background: color(blue, 400);
+  width: 7.75rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  transition: 0.2s;
+
+  @include mobile {
+    height: 2.5rem;
+    width: 6rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+  }
+
+  @include hover {
+    background: mix(white, color(blue, 400), 15%);
+  }
+
+  &[data-variant="cta"] {
+    background: color(blue, 300);
+
+    @include hover {
+      background: mix(white, color(blue, 300), 30%);
+    }
+  }
+}

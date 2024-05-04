@@ -1,0 +1,90 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.table {
+  background: color(gray, 100);
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+
+  @include mobile {
+    padding: 1.25rem 1rem 1rem;
+  }
+}
+
+.tableHeader,
+.tableItem,
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tableHeader {
+  a {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: color(gray, 300);
+    transition: 0.2s;
+
+    @include hover {
+      color: color(blue, 300);
+    }
+  }
+
+  b {
+    font-size: 1rem;
+    font-weight: 700;
+    color: color(blue, 400);
+
+    @include mobile {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border-top: 1px solid color(gray, 200);
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+
+  @include mobile {
+    margin-top: 0.875rem;
+    padding-top: 1rem;
+    gap: 1rem;
+  }
+}
+
+.tableItem,
+.total {
+  font-size: 0.875rem;
+  color: color(gray, 300);
+
+  span {
+    font-weight: 500;
+    color: color(blue, 400);
+  }
+}
+
+.total {
+  padding-inline: 1.5rem;
+
+  @include mobile {
+    padding-inline: 1rem;
+  }
+
+  b {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: color(blue, 300);
+
+    @include mobile {
+      font-size: 1rem;
+    }
+  }
+}

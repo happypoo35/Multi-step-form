@@ -1,95 +1,87 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { isPossiblePhoneNumber } from "react-phone-number-input";
+import { z } from "zod";
+
+import { useAppStore } from "@/store";
+import { InputPhone } from "@/app/input-phone";
+import { Input } from "@/app/input";
+
+import styles from "./page.module.scss";
+
+const schema = z.object({
+  name: z.string().min(1, "This field is required"),
+  email: z
+    .string()
+    .min(1, "This field is required")
+    .email("Invalid email address"),
+  phone: z
+    .string({ invalid_type_error: "This field is required" })
+    .min(1, "This field is required")
+    .refine(isPossiblePhoneNumber, "Invalid phone number"),
+});
+
+export type InfoValues = z.infer<typeof schema>;
+
+export default function InfoPage() {
+  const router = useRouter();
+  const { info, updateInfo } = useAppStore((state) => ({
+    info: state.info,
+    updateInfo: state.updateInfo,
+  }));
+
+  const defaultValues = {
+    name: info?.name,
+    email: info?.email,
+    phone: info?.phone,
+  };
+
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: { errors },
+  } = useForm<InfoValues>({ resolver: zodResolver(schema), defaultValues });
+
+  const onSubmit = (data: InfoValues) => {
+    updateInfo(data);
+    router.push("/plan");
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <form
+      id="form-0"
+      className={styles.form}
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
+      <Input
+        name="name"
+        label="Name"
+        autoComplete="name"
+        placeholder="e.g. Stephen King"
+        register={register}
+        error={errors.name?.message}
+      />
+      <Input
+        name="email"
+        type="email"
+        autoComplete="email"
+        label="Email address"
+        placeholder="e.g. stephenking@lorem.com"
+        register={register}
+        error={errors.email?.message}
+      />
+      <InputPhone
+        name="phone"
+        label="Phone number"
+        placeholder="e.g. +1 234 567890"
+        error={errors.phone?.message}
+        control={control}
+      />
+    </form>
   );
 }

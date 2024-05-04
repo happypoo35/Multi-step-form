@@ -1,0 +1,39 @@
+.footer {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  padding-bottom: 1rem;
+  justify-self: center;
+  width: min(450px, 100%);
+
+  @include tablet {
+    grid-row: 5;
+    grid-column: 1/4;
+    background: white;
+    width: 100%;
+    padding: 1rem 2rem;
+  }
+
+  @include mobile {
+    padding: 1rem;
+  }
+
+  button {
+    grid-column: 2;
+    justify-self: flex-end;
+  }
+}
+
+.backBtn {
+  font-size: 1rem;
+  font-weight: 500;
+  color: color(gray, 300);
+  text-decoration: none;
+  transition: 0.2s;
+  width: fit-content;
+
+  @include hover {
+    color: color(blue, 400);
+  }
+}

@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include mobile {
+    gap: 0.375rem;
+  }
+
+  label {
+    font-size: 0.875rem;
+    color: color(blue, 400);
+
+    @include mobile {
+      font-size: 0.75rem;
+    }
+  }
+
+  input {
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    color: color(blue, 400);
+    height: 2.5rem;
+    padding-inline: 0.875rem;
+    border-radius: 0.5rem;
+    border: 1px solid color(gray, 300);
+    outline: none;
+
+    @include mobile {
+      border-radius: 0.25rem;
+    }
+
+    &[aria-invalid] {
+      border-color: color(red, 100);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: color(blue, 300);
+    }
+
+    &::placeholder {
+      color: color(gray, 300);
+    }
+  }
+}
+
+.error {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: color(red, 100);
+  text-align: right;
+
+  @include mobile {
+    font-size: 0.75rem;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
